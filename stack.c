@@ -1,51 +1,48 @@
 #include "monty.h"
 /**
  * push - adds node to the front of the head
- * @head: head of the list
+ * @stack: head of the list
  * @n:the data to be inputed
  * Return: new node
  */
-stack_t *push(stack_t **head, int n)
+void push(stack_t **stack, unsigned int line_number)
 {
 	 stack_t *new;
 	 stack_t *temp;
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		return (NULL);
+		printf("error");
 	}
-	new->n = n;
-	if (*head == NULL)
+	new->n = line_number;
+	if (*stack == NULL)
 	{
-		*head = new;
+		*stack = new;
 	}
 	else
 	{
-		temp = *head;
-		new->next = *head;
+		temp = *stack;
+		new->next = *stack;
 		temp->prev = new;
-		*head = new;
+		*stack = new;
 	}
-	return (new);
+	
 
 }
 /**
  * pall - pops all elements in a stack
- * @head: head of the list
- * Return: number of elements
+ * @stack: head of the list
  */
-int pall(stack_t *head)
+void pall(stack_t **stack, unsigned int line_number)
 {
-	int count = 0;
-	 const stack_t *temp = head;
+	 
+	 (void) line_number;
+	 stack_t *temp = *stack;
 	while (temp != NULL)
 	{
 		printf("%d\n", temp->n);
 		temp = temp->next;
-		count++;
+		
 	}
-	return (count);
-
-	return (1);
 }
 
