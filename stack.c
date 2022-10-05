@@ -1,10 +1,9 @@
 #include "monty.h"
 /**
- * addhead - adds node to the front of the head
- * 
+ * push - adds node to the front of the head
  * @head: head of the list
  * @n:the data to be inputed
- * Returns: stack_t* 
+ * Return: new node
  */
 stack_t *push(stack_t **head, int n)
 {
@@ -30,7 +29,11 @@ stack_t *push(stack_t **head, int n)
 	return (new);
 
 }
-
+/**
+ * pall - pops all elements in a stack
+ * @head: head of the list
+ * Return: number of elements
+ */
 int pall(stack_t *head)
 {
 	int count = 0;
