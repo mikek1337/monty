@@ -59,5 +59,6 @@ int process_file(const char *filename);
 int _isdigit(char *string);
 void free_all(void);
 int call_funct(globe *var, char *opcode);
+int init(globe *v);
 instruction_t* instruc();
 #endif

@@ -8,14 +8,22 @@ globe var;
  */
 int main(int argc, char *argv[])
 {
-	var.line_number = 1;
-	var.head = NULL;
-	var.dict = instruc();
+	init(&var);
 	if (argc != 2)
 	{
 		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
 	process_file(argv[1]);
+	return (EXIT_SUCCESS);
+}
+
+int init(globe *v)
+{
+	v->dict = instruc();
+	if (v->dict == NULL)
+		return (EXIT_FAILURE);
+	v->head = NULL;
+	v->line_number = 1;
 	return (EXIT_SUCCESS);
 }

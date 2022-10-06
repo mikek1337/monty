@@ -7,34 +7,31 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	 stack_t *head = *stack;
-	 stack_t *new_node = malloc(sizeof(stack));
+	 stack_t *temp = *stack;
+	 stack_t *new = malloc(sizeof(stack));
 	 char *num = strtok(NULL, " \r\t\n");
 	if (num == NULL || (_isdigit(num) != 0 && num[0] != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-	new_node->n = atoi(num);
-	new_node->next = NULL;
-	new_node->prev = NULL;
-	if (!new_node)
+	new->n = atoi(num);
+	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
-	if (head == NULL)
+	if (*stack == NULL)
 	{
-		head = new_node;
+		*stack = new;
 	}
 	else
 	{
-		printf("here");
-		new_node->next = head;
-		head->prev = new_node;
-		*stack = new_node;
+		temp = *stack;
+		new->next = *stack;
+		temp->prev = new;
+		*stack = new;
 	}
-
 }
 /**
  * pall - pops all elements in a stack
@@ -53,7 +50,6 @@ void pall(stack_t **stack, unsigned int line_number)
 		tmp = tmp->next;
 	}
 }
-
 /**
  * pint - Print last node
  * @stack: Double linked list
