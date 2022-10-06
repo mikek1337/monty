@@ -44,7 +44,7 @@ int process_file(const char *filename)
  */
 instruction_t *instruc()
 {
-	instruction_t *i = malloc(sizeof(instruction_t) * 8);
+	instruction_t *i = malloc(sizeof(instruction_t) * 10);
 
 	if (!i)
 	{
@@ -59,6 +59,8 @@ instruction_t *instruc()
 	i[5].opcode = "nop", i[5].f = NULL;
 	i[6].opcode = "add", i[6].f = add;
 	i[7].opcode = NULL, i[7].f = NULL;
+	i[8].opcode = "sub", i[8].f = sub;
+	i[9].opcode = "div", i[9].f = div1;
 	return (i);
 }
 
