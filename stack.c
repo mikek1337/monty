@@ -2,14 +2,14 @@
 /**
  * push - adds node to the front of the head
  * @stack: head of the list
- * @n:the data to be inputed
+ * @line_number:the data to be inputed
  * Return: new node
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *head = *stack;
-	stack_t *new_node = malloc(sizeof(stack));
-	char *num = strtok(NULL, " \r\t\n");
+	 stack_t *head = *stack;
+	 stack_t *new_node = malloc(sizeof(stack));
+	 char *num = strtok(NULL, " \r\t\n");
 	if (num == NULL || (_isdigit(num) != 0 && num[0] != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
@@ -33,13 +33,13 @@ void push(stack_t **stack, unsigned int line_number)
 		new_node->next = head;
 		head->prev = new_node;
 		*stack = new_node;
-		
 	}
 
 }
 /**
  * pall - pops all elements in a stack
  * @stack: head of the list
+ * @line_number: numbers
  */
 void pall(stack_t **stack, unsigned int line_number)
 {
