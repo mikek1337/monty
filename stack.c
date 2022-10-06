@@ -13,12 +13,14 @@ void push(stack_t **stack, unsigned int line_number)
 	if (num == NULL || (_isdigit(num) != 0 && num[0] != '-'))
 	{
 		fprintf(stderr, "L%u: usage: push integer\n", line_number);
+		free_all();
 		exit(EXIT_FAILURE);
 	}
 	new->n = atoi(num);
 	if (!new)
 	{
 		fprintf(stderr, "Error: malloc failed\n");
+		free_all();
 		exit(EXIT_FAILURE);
 	}
 	if (*stack == NULL)
