@@ -54,6 +54,7 @@ extern globe var;
 
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+void pint(stack_t **stack, unsigned int line_number);
 int process_file(const char *filename);
 int _isdigit(char *string);
 void free_all(void);
