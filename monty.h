@@ -55,11 +55,13 @@ extern globe var;
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
 int process_file(const char *filename);
 int _isdigit(char *string);
 void free_all(void);
 int call_funct(globe *var, char *opcode);
 void pop(stack_t **stack, unsigned int line_number);
 int init(globe *v);
+int stack_len(stack_t **head);
 instruction_t* instruc();
 #endif
