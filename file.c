@@ -1,24 +1,23 @@
-#include "monty.h" 
+#include "monty.h"
 #include <stdio.h>
- 
-/**  
- * process_file: start point
+/**
+ * process_file - start point for the process
  * @filename: file name
  * Return: int
  */
 int process_file(const char *filename)
 {
-	FILE *file;
-	char *opcode;
-	size_t tmp;
-	char *s;
+	 FILE *file;
+	 char *opcode;
+	 size_t tmp;
+	 char *s;
 	tmp = 30;
-	s = malloc(sizeof(char)*tmp);
-	file = fopen(filename,"r");
+	s = malloc(sizeof(char) * tmp);
+	file = fopen(filename, "r");
 	if (!file)
 	{
-		fprintf(stderr, "Error: Can't open file %s\n",filename);
-		return (EXIT_FAILURE);   
+		fprintf(stderr, "Error: Can't open file %s\n", filename);
+		return (EXIT_FAILURE);
 	}
 	while (!feof(file))
 	{
@@ -26,14 +25,13 @@ int process_file(const char *filename)
 		opcode = strtok(s, " \r\t\n");
 		if (opcode != NULL)
 		{
-			if(call_funct(&var,opcode) == EXIT_FAILURE)
+			if (call_funct(&var, opcode) == EXIT_FAILURE)
 			{
 				free_all();
 				return (EXIT_FAILURE);
 			}
 		}
 		var.line_number++;
-		
 	}
 	free_all();
 	return (EXIT_SUCCESS);
@@ -53,14 +51,16 @@ instruction_t *instruc()
 		fprintf(stderr, "Error: malloc failed\n");
 		return (NULL);
 	}
-	
 	i[0].opcode = "push", i[0].f = push;
 	i[1].opcode = "pall", i[1].f = pall;
-	
-
 	return (i);
 }
 
+/**
+ * _isdigit - determine wether it is a digit
+ * @string: string
+ * Return: int
+ */
 int _isdigit(char *string)
 {
 	int i;
@@ -72,7 +72,9 @@ int _isdigit(char *string)
 	}
 	return (0);
 }
-
+/**
+ * free_all - frees all elements
+ */
 void free_all(void)
 {
 	free(var.dict);
@@ -86,7 +88,12 @@ void free_all(void)
 		free(var.head);
 	}
 }
-
+/**
+ * call_funct - calling functions
+ * @var: global variable
+ * @opcode: optcode for all
+ * Return: int
+ */
 int call_funct(globe *var, char *opcode)
 {
 	int i;
