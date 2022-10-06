@@ -56,5 +56,7 @@ void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 int process_file(const char *filename);
 int _isdigit(char *string);
+void free_all(void);
+int call_funct(globe *var, char *opcode);
 instruction_t* instruc();
 #endif

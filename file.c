@@ -1,18 +1,18 @@
-#include "monty.h"
+#include "monty.h" 
 #include <stdio.h>
-globe var;
+ 
+/**  
+ * process_file: start point
+ * @filename: file name
+ * Return: int
+ */
 int process_file(const char *filename)
 {
 	FILE *file;
 	char *opcode;
-	
-	int i;
 	size_t tmp;
 	char *s;
-	var.line_number = 1;
-	var.head = NULL;
 	tmp = 30;
-	var.dict = instruc();
 	s = malloc(sizeof(char)*tmp);
 	file = fopen(filename,"r");
 	if (!file)
@@ -26,35 +26,24 @@ int process_file(const char *filename)
 		opcode = strtok(s, " \r\t\n");
 		if (opcode != NULL)
 		{
-			for(i = 0; var.dict[i].opcode; i++)
+			if(call_funct(&var,opcode) == EXIT_FAILURE)
 			{
-				
-				if(strcmp(opcode, var.dict[i].opcode) == 0)
-				{
-					if(!var.dict[i].f)
-					{
-						return (EXIT_SUCCESS);
-					}
-					
-					var.dict[i].f(&var.head, var.line_number);
-					
-				}
+				free_all();
+				return (EXIT_FAILURE);
 			}
-			/* if (strlen(opcode) != 0 && opcode[0] != '#')
-			{
-				fprintf(stderr, "L%u: unknown instruction %s\n",
-						var.line_number, opcode);
-					return (EXIT_FAILURE);
-			} */
-			
 		}
 		var.line_number++;
 		
 	}
+	free_all();
 	return (EXIT_SUCCESS);
 
 }
 
+/**
+ * instruc - instruction
+ * Return: instruction_t*
+ */
 instruction_t *instruc()
 {
 	instruction_t *i = malloc(sizeof(instruction_t) * 2);
@@ -64,8 +53,9 @@ instruction_t *instruc()
 		fprintf(stderr, "Error: malloc failed\n");
 		return (NULL);
 	}
-	i[0].opcode = "pall", i[0].f = pall;
-	i[1].opcode = "push", i[1].f = push;
+	
+	i[0].opcode = "push", i[0].f = push;
+	i[1].opcode = "pall", i[1].f = pall;
 	
 
 	return (i);
@@ -83,3 +73,38 @@ int _isdigit(char *string)
 	return (0);
 }
 
+void free_all(void)
+{
+	free(var.dict);
+	if (var.head != NULL)
+	{
+		while (var.head->next != NULL)
+		{
+			var.head = var.head->next;
+			free(var.head->prev);
+		}
+		free(var.head);
+	}
+}
+
+int call_funct(globe *var, char *opcode)
+{
+	int i;
+
+	for (i = 0; var->dict[i].opcode; i++)
+		if (strcmp(opcode, var->dict[i].opcode) == 0)
+		{
+			if (!var->dict[i].f)
+				return (EXIT_SUCCESS);
+			var->dict[i].f(&var->head, var->line_number);
+			return (EXIT_SUCCESS);
+		}
+	if (strlen(opcode) != 0 && opcode[0] != '#')
+	{
+		fprintf(stderr, "L%u: unknown instruction %s\n",
+			var->line_number, opcode);
+		return (EXIT_FAILURE);
+	}
+
+	return (EXIT_SUCCESS);
+}

@@ -29,11 +29,12 @@ void push(stack_t **stack, unsigned int line_number)
 	}
 	else
 	{
+		printf("here");
 		new_node->next = head;
 		head->prev = new_node;
-		head = new_node;
+		*stack = new_node;
+		
 	}
-	
 
 }
 /**
@@ -44,7 +45,6 @@ void pall(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = *stack;
 	(void) line_number;
-
 	if (!tmp)
 		return;
 	while (tmp)
@@ -52,5 +52,21 @@ void pall(stack_t **stack, unsigned int line_number)
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
+}
+
+/**
+ * pint - Print last node
+ * @stack: Double linked list
+ * @line_number: File line execution
+ */
+void pint(stack_t **stack, unsigned int line_number)
+{
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_all();
+		exit(EXIT_FAILURE);
+	}
+	printf("%d\n", (*stack)->n);
 }
 
