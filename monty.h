@@ -1,10 +1,17 @@
 #ifndef MONTY_H
 #define MONTY_h
-#include <stdlib.h>
 #include <stdio.h>
-#include<sys/types.h>
-#include<sys/stat.h>
-#include<fcntl.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <sys/uio.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <ctype.h>
+#define Buffsize 30
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -35,6 +42,19 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+
+typedef struct globalvar
+{
+        stack_t *head;
+        unsigned int line_number;
+        instruction_t *dict;
+} globe;
+
+extern globe var;
+
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
+int process_file(const char *filename);
+int _isdigit(char *string);
+instruction_t* instruc();
 #endif
