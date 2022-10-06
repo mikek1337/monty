@@ -17,7 +17,11 @@ int main(int argc, char *argv[])
 	process_file(argv[1]);
 	return (EXIT_SUCCESS);
 }
-
+/**
+ * init - entry point
+ * @v: initiates variables
+ * Return: int
+ */
 int init(globe *v)
 {
 	v->dict = instruc();
