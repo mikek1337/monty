@@ -59,6 +59,7 @@ int process_file(const char *filename);
 int _isdigit(char *string);
 void free_all(void);
 int call_funct(globe *var, char *opcode);
+void pop(stack_t **stack, unsigned int line_number);
 int init(globe *v);
 instruction_t* instruc();
 #endif

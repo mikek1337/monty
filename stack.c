@@ -67,4 +67,22 @@ void pint(stack_t **stack, unsigned int line_number)
 	}
 	printf("%d\n", (*stack)->n);
 }
-
+/**
+ * pop - pops an element
+ * @stack: head
+ * @line_number: number
+ */
+void pop(stack_t **stack, unsigned int line_number)
+{
+	 stack_t *tmp = *stack;
+	if (!*stack)
+	{
+		fprintf(stderr, "L%u: can't pint, stack empty\n", line_number);
+		free_all();
+		exit(EXIT_FAILURE);
+	}
+	*stack = tmp->next;
+	if (tmp->next)
+		tmp->next->prev = NULL;
+	free(tmp);
+}
