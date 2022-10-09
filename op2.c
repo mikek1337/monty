@@ -76,6 +76,11 @@ void mul(stack_t **stack, unsigned int line_number)
 	pop(stack, line_number);
 }
 
+/**
+ * mod - calculate the module
+ * @stack: top of the stack
+ * @line_number: instruction line number
+ */
 void mod(stack_t **stack, unsigned int line_number)
 {
 	if (!*stack || (*stack)->next)
