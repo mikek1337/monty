@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "USAGE: monty file\n");
 		return (EXIT_FAILURE);
 	}
-	return (process_file[argv[1]]);
+	return (process_file(argv[1]));
 }
 /**
  * init - entry point
